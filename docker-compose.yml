@@ -1,0 +1,32 @@
+# postgresql docker-compose.yml
+version: '3.1'
+
+services:
+  django_postgres:
+    container_name: django_postgres
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password1234
+      POSTGRES_USER: compensar_user
+      POSTGRES_DB: compensar_db
+    ports:
+      - "5432:5432"
+    #volumes:
+    #  - ./data:/var/lib/postgresql/data
+  
+  adminer_django_postgres:
+    container_name: adminer_django_postgres
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+  
+  django_app:
+    container_name: django_app
+    build: .
+    depends_on:
+      - django_postgres
+    ports:
+      - "8001:8000"
+    #command: python manage.py runserver

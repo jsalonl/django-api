@@ -1,0 +1,9 @@
+# virtual env
+virtual_env
+
+# Environment variables
+app_compensar/.env
+
+# Coverage
+htmlcov
+.coverage
